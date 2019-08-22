@@ -12,12 +12,11 @@ function SamsungTvAccessory(log, config) {
     this.log = log;
     this.name = config.name;
     this.ipAddress = config.ip_address;
-    this.macAddress = config.macAddress;
     this.polling = config.polling | true;
     this.pollingInterval = config.pollingInterval | 1;
     this.isOn;
 
-    this.api = new samsungAPI(this.log, this.ipAddress, this.macAddress);
+    this.api = new samsungAPI(this.log, this.ipAddress);
 
     this.services = [];
 
