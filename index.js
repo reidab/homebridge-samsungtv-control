@@ -14,6 +14,7 @@ function SamsungTvAccessory(log, config) {
     this.ipAddress = config.ip_address;
     this.polling = config.polling || true;
     this.pollingInterval = config.pollingInterval || 1;
+    this.enableSpeaker = config.enableSpeaker == false ? false : true;
     this.isOn;
 
     this.api = new samsungAPI(this.log, this.ipAddress);
@@ -62,10 +63,14 @@ function SamsungTvAccessory(log, config) {
         .setCharacteristic(Characteristic.InputSourceType, Characteristic.InputSourceType.TUNER)
         .setCharacteristic(Characteristic.InputDeviceType, Characteristic.InputDeviceType.TV);
 
-    this.tvService.addLinkedService(this.speakerService);
     this.tvService.addLinkedService(this.tvInputService);
 
-    this.services.push(this.tvService, this.speakerService, this.tvInputService);
+    if (this.enableSpeaker) {
+      this.tvService.addLinkedService(this.speakerService);
+      this.services.push(this.speakerService);
+    }
+
+    this.services.push(this.tvService, this.tvInputService);
 
     this.inputServices = {
         1: this.tvInputService
