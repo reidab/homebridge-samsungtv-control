@@ -12,8 +12,8 @@ function SamsungTvAccessory(log, config) {
     this.log = log;
     this.name = config.name;
     this.ipAddress = config.ip_address;
-    this.polling = config.polling | true;
-    this.pollingInterval = config.pollingInterval | 1;
+    this.polling = config.polling || true;
+    this.pollingInterval = config.pollingInterval || 1;
     this.isOn;
 
     this.api = new samsungAPI(this.log, this.ipAddress);
