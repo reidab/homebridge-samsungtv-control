@@ -21,7 +21,8 @@ function SamsungTvAccessory(log, config) {
         this.log,
         this.ipAddress,
         config.cecId,
-        config.powerManagement
+        config.powerManagement,
+        config.remoteMode
     );
 
     this.services = [];
