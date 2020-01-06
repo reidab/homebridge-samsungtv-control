@@ -17,7 +17,12 @@ function SamsungTvAccessory(log, config) {
     this.enableSpeaker = config.enableSpeaker == false ? false : true;
     this.isOn;
 
-    this.api = new samsungAPI(this.log, this.ipAddress);
+    this.api = new samsungAPI(
+        this.log,
+        this.ipAddress,
+        config.cecId,
+        config.powerManagement
+    );
 
     this.services = [];
 
@@ -96,7 +101,7 @@ SamsungTvAccessory.prototype = {
 
     setPowerState(state, callback) {
         this.log.debug('State received:', state);
-        this.api.setState(state, callback);
+        this.api.setPowerState(state, callback);
     },
 
     getPowerState(callback) {
